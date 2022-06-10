@@ -1,4 +1,4 @@
-package it.aizoon.owasp1;
+package it.aizoon.owasp1.sql;
 
 import java.math.BigDecimal;
 

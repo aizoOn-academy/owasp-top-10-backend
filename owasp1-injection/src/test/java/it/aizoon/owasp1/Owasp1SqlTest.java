@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import it.aizoon.owasp1.sql.AccountDAO;
+import it.aizoon.owasp1.sql.AccountDTO;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class Owasp1Test {
+class Owasp1SqlTest {
 
     @Autowired
     private AccountDAO target;
