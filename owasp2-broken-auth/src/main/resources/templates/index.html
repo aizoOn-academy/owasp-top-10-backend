@@ -64,7 +64,7 @@
                         <td th:text="${course.name}"></td>
                         <td th:text="${course.category}"></td>
                         <td th:text="${course.rating}"></td>
-                        <td th:text="${course.description}"></td>
+                        <td th:utext="${course.description}"></td>
                         <td><a th:href="@{/update/{id}(id=${course.id})}" class="btn btn-dark"><i class="fas fa-edit"></i></a></td>
                         <td>
                             <form action="#" th:action="@{/delete/{id}(id=${course.id})}" th:method="delete">
