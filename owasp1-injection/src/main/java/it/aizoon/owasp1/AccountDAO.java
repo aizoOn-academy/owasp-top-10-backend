@@ -3,17 +3,11 @@
  */
 package it.aizoon.owasp1;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.sql.DataSource;
 
 import org.springframework.stereotype.Component;
 
@@ -24,11 +18,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountDAO {
 
-    private final DataSource dataSource;
     private final EntityManager em;
 
-    public AccountDAO(DataSource dataSource, EntityManager em) {
-        this.dataSource = dataSource;
+    public AccountDAO(EntityManager em) {
         this.em = em;
     }
 
@@ -50,36 +42,6 @@ public class AccountDAO {
                 .customerId(a.getCustomerId())
                 .build())
             .collect(Collectors.toList());
-    }
-
-    /**
-     * Return all accounts owned by a given customer,given his/her external id
-     * 
-     * @param customerId
-     * @return
-     */
-    public List<AccountDTO> safeFindAccountsByCustomerId(String customerId) {
-
-        String sql = "select customer_id, branch_id,acc_number,balance from Accounts where customer_id = ?";
-
-        try (Connection c = dataSource.getConnection(); PreparedStatement p = c.prepareStatement(sql)) {
-            p.setString(1, customerId);
-            ResultSet rs = p.executeQuery();
-            List<AccountDTO> accounts = new ArrayList<>();
-            while (rs.next()) {
-                AccountDTO acc = AccountDTO.builder()
-                    .customerId(rs.getString("customerId"))
-                    .branchId(rs.getString("branch_id"))
-                    .accNumber(rs.getString("acc_number"))
-                    .balance(rs.getBigDecimal("balance"))
-                    .build();
-
-                accounts.add(acc);
-            }
-            return accounts;
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
     }
 
     /**

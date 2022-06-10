@@ -6,9 +6,12 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class Owasp1Test {
 
     @Autowired
@@ -22,26 +25,21 @@ class Owasp1Test {
         Assertions.assertThat(accounts).isNotEmpty();
         Assertions.assertThat(accounts).hasSize(3);
     }
-    
-    @Test
-    void givenASafeMethod_whenHackedCustomerId_thenReturnNoAccounts() {
-
-        List<AccountDTO> accounts = target.safeFindAccountsByCustomerId("C1' or '1'='1");
-        Assertions.assertThat(accounts).isNotNull();
-        Assertions.assertThat(accounts).isEmpty();
-    }
 
     @Test
     void givenASafeJpaMethod_whenHackedCustomerId_thenReturnNoAccounts() {
-
         List<AccountDTO> accounts = target.safeJpaFindAccountsByCustomerId("C1' or '1'='1");
         Assertions.assertThat(accounts).isNotNull();
         Assertions.assertThat(accounts).isEmpty();
+
+        accounts = target.safeJpaFindAccountsByCustomerId("C1");
+        Assertions.assertThat(accounts).isNotEmpty();
+        Assertions.assertThat(accounts).hasSize(1);
     }
 
     @Test
     void givenWrongJpaPlaceholderUsageMethod_whenNormalCall_thenThrowsException() {
-        target.wrongJpaCountRecordsByTableName("Accounts");
+        assertThrows(Exception.class, () -> target.wrongJpaCountRecordsByTableName("Accounts"));
     }
     
 }
