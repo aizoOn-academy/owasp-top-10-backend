@@ -11,6 +11,7 @@
 
     <modules>
         <module>owasp1-injection</module>
+        <module>owasp2-broken-auth</module>
     </modules>
 
 </project>
