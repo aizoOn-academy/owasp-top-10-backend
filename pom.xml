@@ -11,7 +11,8 @@
 
     <modules>
         <module>owasp1-injection</module>
-        <module>owasp2-broken-auth</module>
+        <module>owasp2_5_6_7</module>
+        <module>owasp3-sensitive-data-exposure</module>
     </modules>
 
 </project>

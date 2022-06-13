@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import it.aizoon.dto.JsonDto;
 import it.aizoon.model.Course;
 import it.aizoon.service.CourseService;
 
@@ -75,6 +77,17 @@ public class CourseController {
         courseService.deleteCourseById(id);
         model.addAttribute("courses", courseService.findAllCourses());
         return "redirect:/index";
+    }
+
+    @GetMapping("/message")
+    @ResponseBody
+    public JsonDto getMessage() {
+        JsonDto jsonDto = new JsonDto();
+        if (true) {
+            throw new RuntimeException("errore!");
+        }
+        jsonDto.setMessage("hello world!");
+        return jsonDto;
     }
 }
 
