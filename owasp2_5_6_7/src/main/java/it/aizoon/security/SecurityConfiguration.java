@@ -22,6 +22,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     	http.requiresChannel().anyRequest().requiresSecure().and().authorizeRequests()
                 .antMatchers("/adduser", "/login", "/login-error", "/login-verified", "/login-disabled", "/verify/email", "/login-locked").permitAll()
                 .anyRequest().authenticated().and().formLogin().loginPage("/login").failureHandler(customAuthenticationFailureHandler);
+
+
+
+//        //OWASP 5
+//        http.requiresChannel().anyRequest().requiresSecure()
+//            .and().authorizeRequests().antMatchers("/*").permitAll()
+//            .anyRequest().authenticated().and().formLogin().loginPage("/login").failureHandler(customAuthenticationFailureHandler);
     }
 
     @Override
