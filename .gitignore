@@ -3,7 +3,7 @@
 
 
 derby.log
-evil.bin
+evil*.bin
 ### IntelliJ IDEA ###
 .idea
 *.iws
