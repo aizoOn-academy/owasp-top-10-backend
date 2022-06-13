@@ -15,10 +15,6 @@ public class DataService {
     System.out.println("Opening file: "+ myFile.getCanonicalPath());
 
 
-//    if (!myFile.getCanonicalPath().startsWith(BASE_DIRECTORY)) {
-//      throw new IllegalArgumentException("wrong path: " +  userInput);
-//    }
-
     List<String> lines = Files.readAllLines(myFile.toPath());
     System.out.println(lines);
   }
@@ -27,7 +23,6 @@ public class DataService {
 
     DataService dataService = new DataService();
     dataService.processFile("prova.txt");
-    dataService.processFile("../prova.txt");
 
   }
 

@@ -31,6 +31,7 @@ public class Course {
 	private int rating;
 
 	@Column(name = "DESCRIPTION")
+	//@Pattern(regexp = "[a-zA-Z ]+")
 	@NotEmpty(message = "Course description field can't be empty")
 	private String description;
 }

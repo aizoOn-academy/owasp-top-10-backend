@@ -45,6 +45,7 @@ public class CourseController {
         return "add-course";
     }
 
+    //TODO try <script>alert('ciao!')</script>
     @PostMapping("/addcourse")
     public String addCourse(@Valid Course course, BindingResult result, Model model){
         if (result.hasErrors()) {

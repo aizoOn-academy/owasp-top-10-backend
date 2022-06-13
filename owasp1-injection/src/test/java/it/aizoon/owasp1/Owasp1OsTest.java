@@ -24,8 +24,6 @@ class Owasp1OsTest {
         //todo create an empty file
         //&& separatore
         //copy NUL myfile.txt
-
-        System.out.println(pingService.monitorExternalSystemUnsafe("www.aizoongroup.com & copy NUL myfile.txt"));
     }
 
     @Test

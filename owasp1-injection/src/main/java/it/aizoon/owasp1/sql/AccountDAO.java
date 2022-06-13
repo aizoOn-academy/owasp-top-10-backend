@@ -52,9 +52,9 @@ public class AccountDAO {
      */
     public List<AccountDTO> safeJpaFindAccountsByCustomerId(String customerId) {
 
-        String jql = "from Account where customerId = :customerId";
-        TypedQuery<Account> q = em.createQuery(jql, Account.class)
-            .setParameter("customerId", customerId);
+        String jql = "from Account where customerId = "; //todo
+        TypedQuery<Account> q = em.createQuery(jql, Account.class);
+            //todo .setParameter("paramName", object);
 
         return q.getResultList()
             .stream()
@@ -74,6 +74,8 @@ public class AccountDAO {
      * @return
      */
     public Long wrongJpaCountRecordsByTableName(String tableName) {
+
+        //TODO: ok usare concatenzione di stringhe, ma meglio controllare input con un enum o flag
 
         String jql = "select count(*) from :tableName";
         TypedQuery<Long> q = em.createQuery(jql, Long.class)
